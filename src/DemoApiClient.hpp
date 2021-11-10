@@ -14,7 +14,7 @@ class DemoApiClient : public oatpp::web::client::ApiClient {
   //-----------------------------------------------------------------------------------------------
   // Synchronous calls
   
-  API_CALL_ASYNC("GET", "/", getRootAsync)
+//  API_CALL_ASYNC("GET", "/", getRootAsync)
   
   API_CALL("GET", "get", doGet)
   API_CALL("POST", "post", doPost, BODY_STRING(String, body))
@@ -29,23 +29,6 @@ class DemoApiClient : public oatpp::web::client::ApiClient {
   API_CALL("PUT", "anything/{parameter}", doPutAnything, PATH(String, parameter), BODY_STRING(String, body))
   API_CALL("PATCH", "anything/{parameter}", doPatchAnything, PATH(String, parameter), BODY_STRING(String, body))
   API_CALL("DELETE", "anything/{parameter}", doDeleteAnything, PATH(String, parameter))
-  
-  //-----------------------------------------------------------------------------------------------
-  // Same calls but async
-  
-  API_CALL_ASYNC("GET", "get", doGetAsync)
-  API_CALL_ASYNC("POST", "post", doPostAsync, BODY_STRING(String, body))
-  API_CALL_ASYNC("PUT", "put", doPutAsync, BODY_STRING(String, body))
-  API_CALL_ASYNC("PATCH", "patch", doPatchAsync, BODY_STRING(String, body))
-  API_CALL_ASYNC("DELETE", "delete", doDeleteAsync)
-  
-  API_CALL_ASYNC("POST", "post", doPostWithDtoAsync, BODY_DTO(Object<MyRequestDto>, body))
-  
-  API_CALL_ASYNC("GET", "anything/{parameter}", doGetAnythingAsync, PATH(String, parameter))
-  API_CALL_ASYNC("POST", "anything/{parameter}", doPostAnythingAsync, PATH(String, parameter), BODY_STRING(String, body))
-  API_CALL_ASYNC("PUT", "anything/{parameter}", doPutAnythingAsync, PATH(String, parameter), BODY_STRING(String, body))
-  API_CALL_ASYNC("PATCH", "anything/{parameter}", doPatchAnythingAsync, PATH(String, parameter), BODY_STRING(String, body))
-  API_CALL_ASYNC("DELETE", "anything/{parameter}", doDeleteAnythingAsync, PATH(String, parameter))
   
 #include OATPP_CODEGEN_END(ApiClient)
 };

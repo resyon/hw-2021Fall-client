@@ -1,5 +1,4 @@
 
-#include "AsyncExample.hpp"
 #include "SimpleExample.hpp"
 
 #include "DemoApiClient.hpp"
@@ -38,8 +37,7 @@ void run(){
   auto client = DemoApiClient::createShared(requestExecutor, objectMapper);
   
   SimpleExample::runExample(client);
-  AsyncExample::runExample(client);
-  
+
 }
 
 int main(int argc, const char * argv[]) {

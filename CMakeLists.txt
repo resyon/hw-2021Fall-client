@@ -1,17 +1,16 @@
 cmake_minimum_required(VERSION 3.1)
 
-set(project_name example-api-client) ## rename your project here
+set(project_name hw-2021Fall-client) ## rename your project here
 
 project(${project_name})
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 20)
 
 add_library(${project_name}-lib
-        src/AsyncExample.hpp
         src/DemoApiClient.hpp
         src/DemoApiModels.hpp
         src/SimpleExample.hpp
-        src/AsyncExample.cpp)
+        )
 
 ## link libs
 
@@ -33,12 +32,3 @@ add_executable(${project_name}-exe
 )
 target_link_libraries(${project_name}-exe ${project_name}-lib)
 add_dependencies(${project_name}-exe ${project_name}-lib)
-
-add_executable(${project_name}-test
-        test/tests.cpp
-)
-target_link_libraries(${project_name}-test ${project_name}-lib)
-add_dependencies(${project_name}-test ${project_name}-lib)
-
-enable_testing()
-add_test(project-tests ${project_name}-test)
