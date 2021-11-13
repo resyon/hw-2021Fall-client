@@ -1,5 +1,6 @@
 
-#include "SimpleExample.hpp"
+#include "SimpleClient.hpp"
+#include "CLIClient.hpp"
 
 #include "DemoApiClient.hpp"
 
@@ -14,14 +15,14 @@
 
 std::shared_ptr<oatpp::web::client::RequestExecutor> createOatppExecutor() {
   OATPP_LOGD("App", "Using Oat++ native HttpRequestExecutor.");
-  auto connectionProvider = oatpp::network::tcp::client::ConnectionProvider::createShared({"httpbin.org", 80});
+  auto connectionProvider = oatpp::network::tcp::client::ConnectionProvider::createShared({"localhost", 8000});
   return oatpp::web::client::HttpRequestExecutor::createShared(connectionProvider);
 }
 
-std::shared_ptr<oatpp::web::client::RequestExecutor> createCurlExecutor() {
-  OATPP_LOGD("App", "Using oatpp-curl RequestExecutor.");
-  return oatpp::curl::RequestExecutor::createShared("http://httpbin.org/", false /* set verbose=true for dubug info */);
-}
+//std::shared_ptr<oatpp::web::client::RequestExecutor> createCurlExecutor() {
+//  OATPP_LOGD("App", "Using oatpp-curl RequestExecutor.");
+//  return oatpp::curl::RequestExecutor::createShared("http://httpbin.org/", false /* set verbose=true for dubug info */);
+//}
 
 void run(){
   
@@ -35,10 +36,14 @@ void run(){
   /* DemoApiClient uses DemoRequestExecutor and json::mapping::ObjectMapper */
   /* ObjectMapper passed here is used for serialization of outgoing DTOs */
   auto client = DemoApiClient::createShared(requestExecutor, objectMapper);
-  
-  SimpleExample::runExample(client);
-
+  client->setObjectMapper(objectMapper);
+  client->setUrlPrefix("http://localhost:8000");
+//  SimpleClient::runExample(client);
+  CLIClient cli{std::make_shared<SimpleClient>(client)};
+  cli.run();
 }
+
+
 
 int main(int argc, const char * argv[]) {
 

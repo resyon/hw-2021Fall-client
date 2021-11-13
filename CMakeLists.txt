@@ -9,7 +9,16 @@ set(CMAKE_CXX_STANDARD 20)
 add_library(${project_name}-lib
         src/DemoApiClient.hpp
         src/DemoApiModels.hpp
-        src/SimpleExample.hpp
+        src/SimpleClient.hpp
+        src/SimpleClient.cpp
+        src/CLIClient.cpp
+        src/CLIClient.hpp
+
+        src/dto/UserDto.hpp
+        src/dto/StatusDto.hpp
+        src/dto/DocDto.hpp
+        src/dto/LendRecordDto.hpp
+        src/dto/PageDto.hpp
         )
 
 ## link libs
